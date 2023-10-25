@@ -1,0 +1,7 @@
+[serviceweaver]
+binary = "./collatz"
+rollout = "5m"
+
+[kube]
+listeners.collatz = {public = true}
+repo = "docker.io/themwhittaker"

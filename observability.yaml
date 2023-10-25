@@ -1,0 +1,37 @@
+# Jaegar Deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: jaeger
+spec:
+  selector:
+    matchLabels:
+      app: jaeger
+  template:
+    metadata:
+      labels:
+        app: jaeger
+    spec:
+      containers:
+      - name: jaeger
+        image: jaegertracing/all-in-one:latest
+
+---
+
+# Jaegar Service
+apiVersion: v1
+kind: Service
+metadata:
+  name: jaeger
+spec:
+  ports:
+  - name: ui-port
+    port: 16686
+    targetPort: 16686
+    protocol: TCP
+  - name: collector-port
+    port: 14268
+    targetPort: 14268
+    protocol: TCP
+  selector:
+    app: jaeger
